@@ -23,6 +23,7 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    'mxsdev/nvim-dap-vscode-js',
   },
   config = function()
     local dap = require 'dap'
@@ -54,6 +55,7 @@ return {
     vim.keymap.set('n', '<leader>B', function()
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
     end, { desc = 'Debug: Set Breakpoint' })
+    vim.keymap.set('n', '<leader>v', require('dap.ui.widgets').hover, { desc = 'Debug: Show Value Under Cursor' })
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
@@ -92,5 +94,31 @@ return {
         detached = vim.fn.has 'win32' == 0,
       },
     }
+
+    require('dap-vscode-js').setup {
+      -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
+      debugger_path = vim.fn.expand '$HOME/projects/vscode-js-debug', -- Path to vscode-js-debug installation.
+      -- debugger_cmd = { "js-debug-adapter" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
+      adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
+      -- log_file_path = "(stdpath cache)/dap_vscode_js.log" -- Path for file logging
+      log_file_level = vim.log.levels.DEBUG, -- Logging level for output to file. Set to false to disable file logging.
+      log_console_level = vim.log.levels.DEBUG, -- Logging level for output to console. Set to false to disable console output.
+    }
+
+    -- configuration options
+    -- https://github.com/microsoft/vscode-js-debug/blob/main/OPTIONS.md
+    for _, language in ipairs { 'typescript', 'javascript' } do
+      require('dap').configurations[language] = {
+        {
+          type = 'pwa-msedge',
+          request = 'launch',
+          name = 'Launch Edge',
+          cwd = '${workspaceFolder}',
+          runtimeExecutable = '/usr/bin/microsoft-edge',
+          url = 'http://localhost:3002/',
+          runtimeArgs = { '--disable-gpu' },
+        },
+      }
+    end
   end,
 }
