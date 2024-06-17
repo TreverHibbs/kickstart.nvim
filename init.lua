@@ -98,6 +98,9 @@ vim.g.have_nerd_font = false
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
+-- Nvim emits true (24-bit) colours in the terminal, if 'termguicolors' is set.
+vim.opt.termguicolors = true
+
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
@@ -828,6 +831,9 @@ require('lazy').setup({
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
+
+      -- My custom mini.nvim configs
+      -- require('mini.misc').setup()
     end,
   },
   { -- Highlight, edit, and navigate code

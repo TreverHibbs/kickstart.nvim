@@ -22,6 +22,13 @@ return {
       -- https://github.com/ThePrimeagen/harpoon/tree/harpoon2
       harpoon.setup {
         --TODO setup harpoon to create lists of marks
+        -- Setting up custom behavio for a list named "marks"
+        -- "marks" = {
+        --
+        --   add = function(possible_value)
+        --
+        --   end,
+        -- }
       }
 
       -- basic telescope configuration
