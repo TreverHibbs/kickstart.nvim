@@ -110,6 +110,10 @@ vim.opt.relativenumber = true
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
+-- Enable spell checking
+vim.opt.spell = true
+-- vim.opt.spelllang = 'en_us'
+
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
@@ -164,6 +168,11 @@ vim.opt.scrolloff = 10
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- Spelling keymaps
+vim.keymap.set('n', '<leader>ts', function()
+  vim.o.spell = not vim.o.spell
+end, { desc = '[T]oggle [S]pell checking' })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })

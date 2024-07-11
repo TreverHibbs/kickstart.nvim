@@ -55,7 +55,9 @@ return {
     vim.keymap.set('n', '<leader>B', function()
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
     end, { desc = 'Debug: Set Breakpoint' })
-    vim.keymap.set('n', '<leader>v', require('dap.ui.widgets').hover, { desc = 'Debug: Show Value Under Cursor' })
+    vim.keymap.set('n', '<leader>v', require('dap.ui.widgets').hover, { desc = 'Debug: Show [V]alue Under Cursor' })
+    vim.keymap.set('n', '<leader>u', require('dap').run_to_cursor, { desc = 'Debug: Run To C[U]rsor' })
+    -- vim.keymap.set('n', '<leader>a', dapui.elements.watches.add, { desc = 'Debug: [A]dd Expression To Watched' })
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
@@ -82,6 +84,8 @@ return {
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
 
+    --TODO figure out how to add keybind for adding to watched
+    --after initializer
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close

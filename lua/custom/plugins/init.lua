@@ -7,7 +7,7 @@ return {
     'nvim-treesitter/nvim-treesitter-context',
     config = function()
       require('treesitter-context').setup {
-        max_lines = 1,
+        multiline_threshold = 2,
       }
     end,
   },
@@ -51,9 +51,9 @@ return {
           :find()
       end
 
-      vim.keymap.set('n', '<leader>a', function()
+      vim.keymap.set('n', '<leader>oa', function()
         harpoon:list():add()
-      end, { desc = 'Harpoon: [A]dd to list' })
+      end, { desc = 'Harp[O]on: [A]dd to list' })
       vim.keymap.set('n', '<leader>ol', function()
         toggle_telescope(harpoon:list())
       end, { desc = 'harpoon show [L]ist' })
