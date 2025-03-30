@@ -80,4 +80,7 @@ return {
       end, { desc = 'toggle previous buffer' })
     end,
   },
+  {
+    'jlcrochet/vim-razor',
+  },
 }
