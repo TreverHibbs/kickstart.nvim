@@ -1,4 +1,5 @@
 --[[
+--
 
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
@@ -354,7 +355,7 @@ require('lazy').setup({
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
-        { '<leader>o', group = 'harp[O]on' },
+        { '<leader>o', group = 'Harp[O]on' },
       },
     },
   },
@@ -911,17 +912,14 @@ require('lazy').setup({
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
     'maxmx03/solarized.nvim',
+    lazy = false,
     priority = 1000, -- Make sure to load this before all the other start plugins.
-    config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
-        styles = {
-          comments = { italic = false }, -- Disable italics in comments
-        },
-      }
-
-      -- Load the colorscheme here.
+    ---@type solarized.config
+    opts = {},
+    config = function(_, opts)
+      vim.o.termguicolors = true
       vim.o.background = 'light'
+      require('solarized').setup(opts)
       vim.cmd.colorscheme 'solarized'
 
       -- You can configure highlights by doing something like:
@@ -1018,7 +1016,7 @@ require('lazy').setup({
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
